@@ -4,6 +4,7 @@ import { MeshLine, MeshLineMaterial } from 'three.meshline'
 import greenscreen from '../shaders/greenscreen.frag'
 import vert from '../shaders/default.vert'
 import { TweenMax } from 'gsap';
+import { TextGeometry, PlaneBufferGeometry } from 'three-addons';
 
 export default class Section extends THREE.Group {
 
@@ -21,7 +22,7 @@ export default class Section extends THREE.Group {
 
     create() {
 
-        let textGeom = new THREE.TextGeometry( this.timeline.months[ this.section ].name, {
+        let textGeom = new TextGeometry( this.timeline.months[ this.section ].name, {
             font: this.timeline.assets.fonts['Schnyder L'],
             size: 200,
             height: 0,
@@ -36,7 +37,7 @@ export default class Section extends THREE.Group {
 
     createIntroSection() {
 
-        let sansTextGeom = new THREE.TextGeometry( 'YEAR IN REVIEW', {
+        let sansTextGeom = new TextGeometry( 'YEAR IN REVIEW', {
             font: this.timeline.assets.fonts['SuisseIntl-Bold'],
             size: 60,
             height: 0,
@@ -46,7 +47,7 @@ export default class Section extends THREE.Group {
         let sansText = new THREE.Mesh( sansTextGeom, this.timeline.textMat )
         this.add( sansText )
 
-        let serifTextGeom = new THREE.TextGeometry( '2018', {
+        let serifTextGeom = new TextGeometry( '2018', {
             font: this.timeline.assets.fonts['Schnyder_Edit Outline'],
             size: 640,
             height: 0,
@@ -80,7 +81,7 @@ export default class Section extends THREE.Group {
         this.circle.scale.set( 200, 200, 1 )
         this.badge.add( this.circle )
 
-        let serifTextGeom = new THREE.TextGeometry( '2018-19', {
+        let serifTextGeom = new TextGeometry( '2018-19', {
             font: this.timeline.assets.fonts['Schnyder L'],
             size: 26,
             height: 0,
@@ -103,7 +104,7 @@ export default class Section extends THREE.Group {
 
     createEndSection() {
 
-        let sansTextGeom = new THREE.TextGeometry( 'SEE YOU NEXT YEAR', {
+        let sansTextGeom = new TextGeometry( 'SEE YOU NEXT YEAR', {
             font: this.timeline.assets.fonts['SuisseIntl-Bold'],
             size: 60,
             height: 0,
@@ -113,7 +114,7 @@ export default class Section extends THREE.Group {
         let sansText = new THREE.Mesh( sansTextGeom, this.timeline.textMat )
         this.add( sansText )
 
-        let serifTextGeom = new THREE.TextGeometry( 'END', {
+        let serifTextGeom = new TextGeometry( 'END', {
             font: this.timeline.assets.fonts['Schnyder_Edit Outline'],
             size: 580,
             height: 0,
@@ -184,7 +185,7 @@ export default class Section extends THREE.Group {
         this.position.set( 0, 2000 / this.timeline.scene.scale.y , 0 )
         this.visible = false
 
-        let sansTextGeom = new THREE.TextGeometry( 'SAY HELLO', {
+        let sansTextGeom = new TextGeometry( 'SAY HELLO', {
             font: this.timeline.assets.fonts['SuisseIntl-Bold'],
             size: 10,
             height: 0,
@@ -195,7 +196,7 @@ export default class Section extends THREE.Group {
         sansText.position.set( 0, 60, 0 )
         this.add( sansText )
 
-        let lineOneGeom = new THREE.TextGeometry( "Let’s make 2019 just as memorable with more", {
+        let lineOneGeom = new TextGeometry( "Let’s make 2019 just as memorable with more", {
             font: this.timeline.assets.fonts['Schnyder L'],
             size: 30,
             height: 0,
@@ -206,7 +207,7 @@ export default class Section extends THREE.Group {
         lineOne.position.set( 0, 0, 0 )
         this.add( lineOne )
 
-        let lineTwoGeom = new THREE.TextGeometry( "amazing talent and exciting new projects.", {
+        let lineTwoGeom = new TextGeometry( "amazing talent and exciting new projects.", {
             font: this.timeline.assets.fonts['Schnyder L'],
             size: 30,
             height: 0,
@@ -217,7 +218,7 @@ export default class Section extends THREE.Group {
         lineTwo.position.set( 0, -45, 0 )
         this.add( lineTwo )
 
-        let emailGeom = new THREE.TextGeometry( "hello@craftedbygc.com", {
+        let emailGeom = new TextGeometry( "hello@craftedbygc.com", {
             font: this.timeline.assets.fonts['Schnyder L'],
             size: 36,
             height: 0,
@@ -229,7 +230,7 @@ export default class Section extends THREE.Group {
         this.add( email )
 
         let emailUnderline = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 467, 1 ),
+            PlaneBufferGeometry( 467, 1 ),
             this.timeline.linkUnderlineMat
         )
         emailUnderline.position.set( 0, -172, 0 )
@@ -237,7 +238,7 @@ export default class Section extends THREE.Group {
 
         // for raycasting so it doesn't just pick up on letters
         this.linkBox = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 490, 60 ),
+            PlaneBufferGeometry( 490, 60 ),
             new THREE.MeshBasicMaterial( { alphaTest: 0, visible: false } )
         )
         this.linkBox.position.set( 0, -140, 1 )

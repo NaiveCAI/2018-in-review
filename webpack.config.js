@@ -3,17 +3,15 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const MinifyPlugin = require("babel-minify-webpack-plugin")
 const OptimizeThreePlugin = require('@vxna/optimize-three-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
     entry: [ './src/js/main.js' ],
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'js/[name].[hash].js'
+        filename: 'js/[name].[hash].js',
+        clean:  true,
     },
     module: {
         rules: [
@@ -46,13 +44,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['public/js', 'public/css']),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             inject: false
         }),
         new webpack.HotModuleReplacementPlugin(), // Enable HMR
-        new webpack.HashedModuleIdsPlugin(),
         new BrowserSyncPlugin(
             {
                 host: 'localhost',
@@ -83,15 +79,18 @@ module.exports = {
         new OptimizeThreePlugin()
     ],
     devServer: {
-        hot: true, // Tell the dev-server we're using HMR
-        contentBase: path.resolve(__dirname, 'public'),
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        hot: true,
     },
-    devtool: devMode ? 'cheap-eval-source-map' : false,
+    // devServer: {
+    //     hot: true, // Tell the dev-server we're using HMR
+    //     contentBase: path.resolve(__dirname, 'public'),
+    // },
+    // devtool: devMode ? 'cheap-eval-source-map' : false,
+    devtool: devMode ? 'eval-cheap-module-source-map' : 'source-map',
     optimization: {
-        minimizer: [
-            new MinifyPlugin(),
-            new OptimizeCSSAssetsPlugin()
-        ],
         runtimeChunk: 'single',
         splitChunks: {
             chunks: 'all',
@@ -104,6 +103,7 @@ module.exports = {
                     },
                 }
             }
-        }
+        },
+        moduleIds: 'deterministic', // 使用确定性的模块ID
     }
 }

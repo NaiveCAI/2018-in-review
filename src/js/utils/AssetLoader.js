@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import progressPromise from '../utils/progressPromise'
+import { FontLoader } from 'three-addons'
 
 export default class AssetLoader {
 
@@ -86,7 +87,7 @@ export default class AssetLoader {
         }
 
         // Load Fonts
-        let fontLoader = new THREE.FontLoader()
+        let fontLoader = new FontLoader()
         let fonts = [
             'fonts/schnyder.json',
             'fonts/schnyder-outline.json',

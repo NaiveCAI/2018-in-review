@@ -9,6 +9,7 @@ import Konami from 'konami'
 import months from '../config/months'
 import assetOrder from '../config/assetOrder'
 import assetData from '../config/assetData'
+import { TextGeometry, PlaneBufferGeometry } from 'three-addons';
 
 export default class Timeline {
 
@@ -237,7 +238,7 @@ export default class Timeline {
 
         this.linkGroup = new THREE.Group()
 
-        let linkGeom = new THREE.TextGeometry( 'SEE MORE', {
+        let linkGeom = new TextGeometry( 'SEE MORE', {
             font: this.assets.fonts['SuisseIntl-Bold'],
             size: 6,
             height: 0,
@@ -247,14 +248,14 @@ export default class Timeline {
         this.link = new THREE.Mesh( linkGeom, this.captionTextMat )
 
         this.linkUnderline = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 45, 1 ),
+            PlaneBufferGeometry( 45, 1 ),
             this.linkUnderlineMat
         )
         this.linkUnderline.position.set( 0, -10, 0 )
 
         // for raycasting so it doesn't just pick up on letters
         this.linkBox = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 70, 20 ),
+            PlaneBufferGeometry( 70, 20 ),
             new THREE.MeshBasicMaterial( { alphaTest: 0, visible: false } )
         )
         this.linkGroup.visible = false

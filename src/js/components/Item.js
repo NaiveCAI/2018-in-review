@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import frag from '../shaders/item.frag'
 import vert from '../shaders/default.vert'
+import { TextGeometry } from 'three-addons';
+
 
 export default class Item extends THREE.Group {
 
@@ -75,7 +77,7 @@ export default class Item extends THREE.Group {
 
         if( this.data.caption !== '' ) {
 
-            let captionGeom = new THREE.TextGeometry( this.data.caption, {
+            let captionGeom = new TextGeometry( this.data.caption, {
                 font: this.timeline.assets.fonts['Schnyder L'],
                 size: 18,
                 height: 0,
