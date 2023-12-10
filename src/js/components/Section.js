@@ -1,10 +1,11 @@
 import * as THREE from 'three'
-import SVGLoader from 'three-svg-loader'
-import { MeshLine, MeshLineMaterial } from 'three.meshline'
+// import SVGLoader from 'three-svg-loader'
+// import { MeshLine, MeshLineMaterial } from 'three.meshline'
 import greenscreen from '../shaders/greenscreen.frag'
 import vert from '../shaders/default.vert'
-import { TweenMax } from 'gsap';
-import { TextGeometry, PlaneBufferGeometry } from 'three-addons';
+// import { TweenMax } from 'gsap';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
 
 export default class Section extends THREE.Group {
 
@@ -230,7 +231,7 @@ export default class Section extends THREE.Group {
         this.add( email )
 
         let emailUnderline = new THREE.Mesh(
-            PlaneBufferGeometry( 467, 1 ),
+            new THREE.PlaneGeometry( 467, 1 ),
             this.timeline.linkUnderlineMat
         )
         emailUnderline.position.set( 0, -172, 0 )
@@ -238,7 +239,7 @@ export default class Section extends THREE.Group {
 
         // for raycasting so it doesn't just pick up on letters
         this.linkBox = new THREE.Mesh(
-            PlaneBufferGeometry( 490, 60 ),
+            new THREE.PlaneGeometry( 490, 60 ),
             new THREE.MeshBasicMaterial( { alphaTest: 0, visible: false } )
         )
         this.linkBox.position.set( 0, -140, 1 )

@@ -4,8 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "NODE_ENV=production BABEL_ENV=production webpack -p"
+    "start": "webpack serve --mode development",
+    "build": "NODE_ENV=production BABEL_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "",

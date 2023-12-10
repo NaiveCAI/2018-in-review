@@ -3,7 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeThreePlugin = require('@vxna/optimize-three-webpack-plugin')
+// const OptimizeThreePlugin = require('@vxna/optimize-three-webpack-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
@@ -45,8 +45,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            inject: false
+            template: './src/index.html',
+            inject: true,
         }),
         new webpack.HotModuleReplacementPlugin(), // Enable HMR
         new BrowserSyncPlugin(
@@ -75,21 +75,16 @@ module.exports = {
         ),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash].css',
-        }),
-        new OptimizeThreePlugin()
+        })
+        // new OptimizeThreePlugin()
     ],
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        hot: true,
     },
-    // devServer: {
-    //     hot: true, // Tell the dev-server we're using HMR
-    //     contentBase: path.resolve(__dirname, 'public'),
-    // },
     // devtool: devMode ? 'cheap-eval-source-map' : false,
-    devtool: devMode ? 'eval-cheap-module-source-map' : 'source-map',
+    // devtool: devMode ? 'eval-cheap-module-source-map' : 'source-map',
     optimization: {
         runtimeChunk: 'single',
         splitChunks: {

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import progressPromise from '../utils/progressPromise'
-import { FontLoader } from 'three-addons'
 
 export default class AssetLoader {
 
@@ -145,7 +145,7 @@ export default class AssetLoader {
 
             texture.size = new THREE.Vector2( texture.image.width / 2, texture.image.height / 2 )
             texture.needsUpdate = true
-            this.renderer.setTexture2D( texture, 0 )
+            // this.renderer.setTexture2D( texture, 0 )
 
             texture.name = `${month}/${filename}`
             texture.mediaType = 'image'
@@ -162,7 +162,7 @@ export default class AssetLoader {
 
                 texture.size = new THREE.Vector2( texture.image.width / 2, texture.image.height / 2 )
                 texture.needsUpdate = true
-                this.renderer.setTexture2D( texture, 0 )
+                // this.renderer.setTexture2D( texture, 0 )
 
             } )
             texture.size = new THREE.Vector2( 10, 10 )
@@ -190,7 +190,7 @@ export default class AssetLoader {
         if( resolve ) {
 
             texture.size = new THREE.Vector2( texture.image.videoWidth / 2, texture.image.videoHeight / 2 )
-            this.renderer.setTexture2D( texture, 0 )
+            // this.renderer.setTexture2D( texture, 0 )
 
             if( !this.isMobile) {
                 video.oncanplaythrough = null

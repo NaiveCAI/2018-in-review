@@ -9,7 +9,7 @@ import Konami from 'konami'
 import months from '../config/months'
 import assetOrder from '../config/assetOrder'
 import assetData from '../config/assetData'
-import { TextGeometry, PlaneBufferGeometry } from 'three-addons';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 export default class Timeline {
 
@@ -248,14 +248,14 @@ export default class Timeline {
         this.link = new THREE.Mesh( linkGeom, this.captionTextMat )
 
         this.linkUnderline = new THREE.Mesh(
-            PlaneBufferGeometry( 45, 1 ),
+            new THREE.PlaneGeometry( 45, 1 ),
             this.linkUnderlineMat
         )
         this.linkUnderline.position.set( 0, -10, 0 )
 
         // for raycasting so it doesn't just pick up on letters
         this.linkBox = new THREE.Mesh(
-            PlaneBufferGeometry( 70, 20 ),
+            new THREE.PlaneGeometry( 70, 20 ),
             new THREE.MeshBasicMaterial( { alphaTest: 0, visible: false } )
         )
         this.linkGroup.visible = false
@@ -872,9 +872,12 @@ export default class Timeline {
     handleVideos() {
 
         this.camera.updateMatrixWorld();
-        this.camera.matrixWorldInverse.getInverse( this.camera.matrixWorld );
+        // this.camera.matrixWorldInverse.getInverse( this.camera.matrixWorld );
+        this.camera.matrixWorldInverse.copy( this.camera.matrixWorld ).invert();
         this.cameraViewProjectionMatrix.multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse );
-        this.frustum.setFromMatrix( this.cameraViewProjectionMatrix );
+        // this.frustum.setFromMatrix( this.cameraViewProjectionMatrix );
+        this.frustum.setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse));
+
 
         for( let i = 0; i < this.videoCount; i++ ) {
 

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import frag from '../shaders/item.frag'
 import vert from '../shaders/default.vert'
-import { TextGeometry } from 'three-addons';
 
 
 export default class Item extends THREE.Group {
